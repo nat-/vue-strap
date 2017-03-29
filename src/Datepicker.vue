@@ -76,6 +76,10 @@ export default {
       type: String,
       twoWay: true
     },
+    startView{
+      type:String, 
+      default, 'day'
+    },
     format: {
       default: 'MM/dd/yyyy'
     },
@@ -138,10 +142,18 @@ export default {
     },
     inputClick () {
       this.currDate = this.parse(this.value) || this.parse(new Date())
-      if (this.displayMonthView || this.displayYearView) {
-        this.displayDayView = false
+      if (this.displayMonthView || this.displayYearView || this.displayDayView) {
+        this.displayYearView = false;
+        this.displayDayView = false;
+        this.displayMonthView = false;
       } else {
-        this.displayDayView = !this.displayDayView
+        if(startView == 'year'){
+          this.displayYearView =!this.displayYearView;
+        }elseif(this.startView == 'month'){
+          this.displayMonthView =!this.displayMonthView;        
+        }
+        else
+          this.displayDayView = !this.displayDayView
       }
     },
     preNextDecadeClick (flag) {
